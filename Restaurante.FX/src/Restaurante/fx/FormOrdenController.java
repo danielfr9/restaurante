@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Restaurante.fx;
 
 import Restaurante.bl.Cliente;
@@ -56,7 +52,7 @@ public class FormOrdenController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {        
        Cliente = new Cliente();
        
        colId.setCellValueFactory(new PropertyValueFactory("id"));

@@ -19,7 +19,7 @@ public class RestauranteFX extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FormPedido.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FormOrden.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -32,6 +32,7 @@ public class RestauranteFX extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }

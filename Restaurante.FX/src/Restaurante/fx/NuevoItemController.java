@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -22,7 +21,7 @@ public class NuevoItemController implements Initializable {
     Button btnCancelar;
     
     @FXML
-    TextField txtId;
+    Button btnAgregar;
     
     @FXML
     TextField txtNombre;
@@ -38,12 +37,7 @@ public class NuevoItemController implements Initializable {
     
     @FXML
     TextField txtTamaño;
-    
-    @FXML
-    ComboBox cmbPedido;
-    
-    @FXML
-    ComboBox cmbTipo;
+   
     
     private FormOrdenController controller;
     private Item item;
@@ -55,8 +49,7 @@ public class NuevoItemController implements Initializable {
     
     public void setItem(Item item) {
         this.item = item;
-        
-        txtId.textProperty().bindBidirectional(item.idProperty(), new NumberStringConverter());
+              
         txtNombre.textProperty().bindBidirectional(item.nombreProperty());
         txtDescripcion.textProperty().bindBidirectional(item.descripcionProperty()); 
         txtPrecio.textProperty().bindBidirectional(item.precioProperty(), new NumberStringConverter());
@@ -71,7 +64,7 @@ public class NuevoItemController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }    
     
-    public void aceptar() {
+    public void agregar() { 
         controller.guardar(item);
         cerrar();
     }

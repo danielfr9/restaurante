@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Restaurante.bl;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -28,6 +24,23 @@ public class Item {
         precio = new SimpleDoubleProperty();
         categoria = new SimpleStringProperty();
         tamaño = new SimpleStringProperty();
+    }
+    
+    //Para la clase Menu
+    Item(Integer a, String b, String c, Double d, String e, String f) {
+        id = new SimpleIntegerProperty();
+        nombre = new SimpleStringProperty();
+        descripcion = new SimpleStringProperty();
+        precio = new SimpleDoubleProperty();
+        categoria = new SimpleStringProperty();
+        tamaño = new SimpleStringProperty();
+        
+        this.id.set(a);
+        this.nombre.set(b);
+        this.descripcion.set(c);
+        this.precio.set(d);
+        this.categoria.set(e);
+        this.tamaño.set(f);    
     }
     
     

@@ -8,16 +8,16 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class Menu {
-    private final ArrayList<Item> entradas = new ArrayList<>();
-    private final ArrayList<Item> aperitivos = new ArrayList<>();
-    private final ArrayList<Item> bebidas = new ArrayList<>();
-    private final ArrayList<Item> postres = new ArrayList<>();
-    private final ArrayList<Item> ensaladas = new ArrayList<>();
-    private final ArrayList<Item> sopas = new ArrayList<>();
-    private final ArrayList<Item> carnes = new ArrayList<>();
-    private final ArrayList<Item> mariscos = new ArrayList<>();
-    private final ArrayList<Item> pastas = new ArrayList<>();
-    /*
+    private final ArrayList<Item> entradas = new ArrayList();
+    private final ArrayList<Item> aperitivos = new ArrayList();
+    private final ArrayList<Item> bebidas = new ArrayList();
+    private final ArrayList<Item> postres = new ArrayList();
+    private final ArrayList<Item> ensaladas = new ArrayList();
+    private final ArrayList<Item> sopas = new ArrayList();
+    private final ArrayList<Item> carnes = new ArrayList();
+    private final ArrayList<Item> mariscos = new ArrayList();
+    private final ArrayList<Item> pastas = new ArrayList();
+    
     public Menu(){
         cargarMenu();
     }
@@ -86,7 +86,4 @@ public class Menu {
     public ArrayList<Item> getPastas() {
         return pastas;
     }
-    
-    */
-    
 }
