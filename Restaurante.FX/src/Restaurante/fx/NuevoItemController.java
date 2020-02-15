@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Restaurante.fx;
 
-import Restaurante.bl.Pedido;
+import Restaurante.bl.Item;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -21,7 +17,7 @@ import javafx.scene.control.ComboBox;
  *
  * @author Daniel
  */
-public class NuevoEditarPedidoController implements Initializable {
+public class NuevoItemController implements Initializable {
     @FXML
     Button btnCancelar;
     
@@ -38,26 +34,34 @@ public class NuevoEditarPedidoController implements Initializable {
     TextField txtPrecio;
     
     @FXML
+    TextField txtCategoria;
+    
+    @FXML
+    TextField txtTamaño;
+    
+    @FXML
     ComboBox cmbPedido;
     
     @FXML
     ComboBox cmbTipo;
     
-    private FormPedidoController controller;
-    private Pedido pedido;
+    private FormOrdenController controller;
+    private Item item;
     
     
-    public void setController(FormPedidoController controller) {
+    public void setController(FormOrdenController controller) {
         this.controller = controller;
     } 
     
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setItem(Item item) {
+        this.item = item;
         
-        txtId.textProperty().bindBidirectional(pedido.idProperty(), new NumberStringConverter());
-        txtNombre.textProperty().bindBidirectional(pedido.nombreProperty());
-        txtDescripcion.textProperty().bindBidirectional(pedido.descripcionProperty()); 
-        txtPrecio.textProperty().bindBidirectional(pedido.precioProperty(), new NumberStringConverter());
+        txtId.textProperty().bindBidirectional(item.idProperty(), new NumberStringConverter());
+        txtNombre.textProperty().bindBidirectional(item.nombreProperty());
+        txtDescripcion.textProperty().bindBidirectional(item.descripcionProperty()); 
+        txtPrecio.textProperty().bindBidirectional(item.precioProperty(), new NumberStringConverter());
+        txtCategoria.textProperty().bindBidirectional(item.categoriaProperty());
+        txtTamaño.textProperty().bindBidirectional(item.tamañoProperty());
     }
     
     /**
@@ -68,7 +72,7 @@ public class NuevoEditarPedidoController implements Initializable {
     }    
     
     public void aceptar() {
-        controller.guardar(pedido);
+        controller.guardar(item);
         cerrar();
     }
     

@@ -12,7 +12,9 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Daniel
  */
-public class Platillo extends Pedido{
+
+//Heredaba de Orden
+public class Platillo{
     private final SimpleStringProperty tamano;
     private final SimpleIntegerProperty cantidadPersonas;
 

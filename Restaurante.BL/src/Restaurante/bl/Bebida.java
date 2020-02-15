@@ -8,7 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Daniel
  */
-public class Bebida extends Pedido{
+//Heredaba de Orden
+public class Bebida{
     private final SimpleStringProperty marca;
     private final SimpleIntegerProperty cantidadMiliLitros;
 

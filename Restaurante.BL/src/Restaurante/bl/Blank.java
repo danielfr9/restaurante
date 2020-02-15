@@ -1,6 +1,11 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Restaurante.bl;
 
+import java.util.ArrayList;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,13 +14,16 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Daniel
  */
-public class Pedido {
+public class Blank {
     private SimpleIntegerProperty id;
     private SimpleStringProperty nombre;
     private SimpleStringProperty descripcion;
     private SimpleDoubleProperty precio;
     
-    public Pedido() {
+    private final ArrayList<Item> listaPedido = new ArrayList<>();
+    
+    //Construct Pedido
+    public Blank() {
         id = new SimpleIntegerProperty();
         nombre = new SimpleStringProperty();
         descripcion = new SimpleStringProperty();

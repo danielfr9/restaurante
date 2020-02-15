@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Restaurante.FX.jar" size="10913" download="eager" />
-    <jar href="lib\Restaurante.BL.jar" size="12689" download="eager" />
+    <jar href="Restaurante.FX.jar" size="6384" download="eager" />
+    <jar href="lib\Restaurante.BL.jar" size="13734" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Restaurante.FX" >
     <param name="requiredFXVersion" value="8.0+"/>

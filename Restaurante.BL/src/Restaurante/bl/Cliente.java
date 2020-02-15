@@ -2,60 +2,71 @@
 package Restaurante.bl;
 
 import java.util.ArrayList;
+import javafx.beans.property.SimpleObjectProperty;
 
 /**
  *
  * @author Daniel
  */
 public class Cliente {
-    private final ArrayList<Pedido> Orden;
+    //private final ArrayList<Pedido> Orden;
+    //private Orden Orden;
+    private final ArrayList<Item> Orden;
     
     public Cliente() {
-        Orden = new ArrayList<>();
-        
-        //crearDatosdePrueba();
+        Orden = new ArrayList();
+        crearDatosdePrueba();
     }
-
+/*
     public ArrayList<Pedido> obtenerPedidos() {
         return Orden;
     }
+*/
+    public ArrayList<Item> getOrden(){
+        return Orden;
+    }
     
-    public void guardar(Pedido pedido) {
-        if (pedido.getId().equals(0)) {
+    public void guardar(Item item) {
+        if (item.getId().equals(0)) {
             Integer id = obtenerSiguienteId();
             
-            pedido.setId(id);
+            item.setId(id);
             
-            Orden.add(pedido);
+            Orden.add(item);
         }
     }
-    /**
+    
     private void crearDatosdePrueba() {
-        Platillo pedido1 = new Platillo();
+        //id,nombre,descripcion,precio,categorias,tamano
+        Item item1 = new Item();
+        //Item item1 = new Item(1,"Pollo Frito","Pollo con tajadas y chimol",120.0,"Carnes","Pechuga");
+        //Item item2 = new Item(2,"Ensalada com pollo","Ensalada de verduaras verdes con pollo",150.0,"Ensaladas","Mediana");
+        
+        item1.setId(1);
+        item1.setNombre("Pollo Frito");
+        item1.setDescripcion("Pollo Frito con Tajadas y chimol");
+        item1.setPrecio(120.0);
+        item1.setCategoria("Carnes");
+        item1.setTamaño("Pechuga");
+        
+        /*
         pedido1.setId(1);
         pedido1.setNombre("iPhone X");
         pedido1.setDescripcion("MUY CARO");
         pedido1.setPrecio(1400.0);
-        //pedido1.setTamano("Grande");
-        //pedido1.setcantidadPersonas(3);
-
-        Bebida pedido2 = new Bebida();
-        pedido2.setId(2);
-        pedido2.setNombre("Samsung Galaxy S10");
-        pedido2.setDescripcion("MUY BUENO");
-        pedido2.setPrecio(1200.0);
-        //pedido2.setMarca("Coca Cola");
-        //pedido2.setCantidadMiliLitros(400);
+        pedido1.setTamano("Grande");
+        pedido1.setcantidadPersonas(3);
+        */
         
-        Orden.add(pedido1);
-        Orden.add(pedido2);
+        Orden.add(item1);
+        //Orden.add(item2);
     }   
-    */ 
+    
     private Integer obtenerSiguienteId() {
         Integer maxId = 1;
-        for(Pedido pedido: Orden) {
-            if (pedido.getId() >= maxId) {
-                maxId = pedido.getId() + 1;
+        for(Item item: Orden) {
+            if (item.getId() >= maxId) {
+                maxId = item.getId() + 1;
             }
         }
         return maxId;

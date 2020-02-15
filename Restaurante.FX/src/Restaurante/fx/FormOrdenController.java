@@ -6,7 +6,7 @@
 package Restaurante.fx;
 
 import Restaurante.bl.Cliente;
-import Restaurante.bl.Pedido;
+import Restaurante.bl.Item;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,58 +29,62 @@ import javafx.stage.Stage;
  *
  * @author Daniel
  */
-public class FormPedidoController implements Initializable {
+public class FormOrdenController implements Initializable {
     @FXML
     private TableView tableView;
     
     @FXML
-    private TableColumn<Pedido, Integer> colId;
+    private TableColumn<Item, Integer> colId;
 
     @FXML
-    private TableColumn<Pedido, String> colDescripcion;
+    private TableColumn<Item, String> colDescripcion;
     
     @FXML
-    private TableColumn<Pedido, Double> colPrecio;
+    private TableColumn<Item, Double> colPrecio;
 
     @FXML
-    private TableColumn<Pedido, String> colNombre;
+    private TableColumn<Item, String> colNombre;
     
-    ObservableList<Pedido> dataPedidos;
+    @FXML
+    private TableColumn<Item, String> colCategoria;
     
-    Cliente servicioCliente;
+    ObservableList<Item> dataOrden;
+    
+    Cliente Cliente;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       servicioCliente = new Cliente();
+       Cliente = new Cliente();
        
        colId.setCellValueFactory(new PropertyValueFactory("id"));
-       colDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
-       colPrecio.setCellValueFactory(new PropertyValueFactory("precio"));
        colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
-       
+       colDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+       colCategoria.setCellValueFactory(new PropertyValueFactory("categoria"));
+       colPrecio.setCellValueFactory(new PropertyValueFactory("precio"));
+    
        cargarDatos();
     }    
     
-    public void nuevoPedido() throws IOException {
-        Pedido nuevoPedido = new Pedido();
-        abrirVentanaModal(nuevoPedido, "Nuevo Pedido");
+    public void nuevoItem() throws IOException {
+        Item nuevoItem = new Item();
+        abrirVentanaModal(nuevoItem, "Nuevo Item");
     }
     
-    public void guardar(Pedido pedido) {
-        servicioCliente.guardar(pedido);
+    public void guardar(Item item) {
+        Cliente.guardar(item);
         cargarDatos();
     }
     
-    private void abrirVentanaModal(Pedido pedido , String titulo) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("NuevoEditarPedido.fxml"));
+    private void abrirVentanaModal(Item item , String titulo) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("NuevoItem.fxml"));
         Parent root = (Parent) loader.load();
         
-        NuevoEditarPedidoController controller = loader.getController();
+        NuevoItemController controller = loader.getController();
         controller.setController(this);
-        controller.setPedido(pedido);
+        controller.setItem(item);
         
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -92,9 +96,9 @@ public class FormPedidoController implements Initializable {
     }
     
     private void cargarDatos() {
-       dataPedidos = FXCollections.observableArrayList(servicioCliente.obtenerPedidos());
+       dataOrden = FXCollections.observableArrayList(Cliente.getOrden());
        
-       tableView.setItems(dataPedidos);
+       tableView.setItems(dataOrden);
        tableView.refresh();
     }
     
