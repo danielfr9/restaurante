@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Daniel
  */
-public class Menu {
+public class MenuPrototipo {
     private final ArrayList<Item> entradas = new ArrayList();
     private final ArrayList<Item> aperitivos = new ArrayList();
     private final ArrayList<Item> bebidas = new ArrayList();
@@ -18,7 +18,7 @@ public class Menu {
     private final ArrayList<Item> mariscos = new ArrayList();
     private final ArrayList<Item> pastas = new ArrayList();
     
-    public Menu(){
+    public MenuPrototipo(){
         cargarMenu();
     }
 
