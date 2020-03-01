@@ -1,8 +1,10 @@
 
 package Restaurante.bl;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -13,36 +15,21 @@ public class Item {
     private final SimpleIntegerProperty id;
     private final SimpleStringProperty nombre;
     private final SimpleStringProperty descripcion;
+    private final SimpleObjectProperty categoria;
+    private final SimpleObjectProperty tamaño;
+    //private final SimpleStringProperty tamaño;
     private final SimpleDoubleProperty precio;
-    private final SimpleStringProperty categoria;
-    private final SimpleStringProperty tamaño;
+    private final SimpleBooleanProperty activo;
     
     public Item() {
         id = new SimpleIntegerProperty();
         nombre = new SimpleStringProperty();
         descripcion = new SimpleStringProperty();
+        categoria = new SimpleObjectProperty();
+        tamaño = new SimpleObjectProperty();
         precio = new SimpleDoubleProperty();
-        categoria = new SimpleStringProperty();
-        tamaño = new SimpleStringProperty();
+        activo = new SimpleBooleanProperty();
     }
-    
-    //Para la clase Menu
-    Item(Integer a, String b, String c, Double d, String e, String f) {
-        id = new SimpleIntegerProperty();
-        nombre = new SimpleStringProperty();
-        descripcion = new SimpleStringProperty();
-        precio = new SimpleDoubleProperty();
-        categoria = new SimpleStringProperty();
-        tamaño = new SimpleStringProperty();
-        
-        this.id.set(a);
-        this.nombre.set(b);
-        this.descripcion.set(c);
-        this.precio.set(d);
-        this.categoria.set(e);
-        this.tamaño.set(f);    
-    }
-    
     
     public Integer getId() {
         return id.get();
@@ -92,29 +79,40 @@ public class Item {
         return precio;
     }
 
-    public String getCategoria(){
-        return categoria.get();
+    public Categoria getCategoria(){
+        return (Categoria) categoria.get();
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria.set(categoria);
     }
     
-    public SimpleStringProperty categoriaProperty() {
+    public SimpleObjectProperty categoriaProperty() {
         return categoria;
     }
     
-    public String getTamaño(){
-        return tamaño.get();
+    public Tamaño getTamaño(){
+        return (Tamaño) tamaño.get();
     }
 
-    public void setTamaño(String tamaño) {
+    public void setTamaño(Tamaño tamaño) {
         this.tamaño.set(tamaño);
     }
     
-    public SimpleStringProperty tamañoProperty() {
+    public SimpleObjectProperty tamañoProperty() {
         return tamaño;
     }
     
+    public Boolean getActivo(){
+        return activo.get();
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo.set(activo);
+    }
+    
+    public SimpleBooleanProperty activoProperty() {
+        return activo;
+    }  
 }
 
