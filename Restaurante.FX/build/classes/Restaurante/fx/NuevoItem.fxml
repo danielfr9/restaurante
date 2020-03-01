@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurante.fx.NuevoItemController">
+<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="604.0" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurante.fx.NuevoItemController">
    <children>
-      <Label fx:id="lblDescripcion" layoutX="187.0" layoutY="163.0" text="Descripción:" />
-      <TextField fx:id="txtDescripcion" layoutX="265.0" layoutY="163.0" prefHeight="25.0" prefWidth="185.0" />
-      <Button fx:id="btnAgregar" layoutX="338.0" layoutY="373.0" mnemonicParsing="false" onAction="#agregar" prefHeight="25.0" prefWidth="85.0" text="Agregar">
+      <JFXTextField fx:id="txtNombre" labelFloat="true" layoutX="144.0" layoutY="94.0" prefHeight="25.0" prefWidth="149.0" promptText="Nombre" />
+      <JFXTextField fx:id="txtDescripcion" labelFloat="true" layoutX="144.0" layoutY="137.0" prefHeight="25.0" prefWidth="185.0" promptText="Descripcion" />
+      <JFXComboBox fx:id="cmbCategoria" editable="true" labelFloat="true" layoutX="144.0" layoutY="178.0" prefWidth="150.0" promptText="Categoria" />
+      <JFXComboBox fx:id="cmbTamaño" editable="true" labelFloat="true" layoutX="144.0" layoutY="221.0" prefHeight="25.0" prefWidth="130.0" promptText="Tamaño" />
+      <JFXTextField fx:id="txtPrecio" labelFloat="true" layoutX="144.0" layoutY="262.0" prefHeight="25.0" prefWidth="71.0" promptText="Precio" />
+      <JFXCheckBox fx:id="chActivo" layoutX="144.0" layoutY="309.0" mnemonicParsing="false" />
+      <JFXButton fx:id="btnAgregar" layoutX="347.0" layoutY="318.0" mnemonicParsing="false" onAction="#agregar" prefHeight="25.0" prefWidth="85.0" styleClass="jfx-button-ok" text="Agregar">
          <font>
             <Font size="14.0" />
-         </font></Button>
-      <Button fx:id="btnCancelar" layoutX="238.0" layoutY="373.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="85.0" text="Cancelar">
+         </font></JFXButton>
+      <JFXButton fx:id="btnCancelar" layoutX="443.0" layoutY="318.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="85.0" styleClass="jfx-button-flat" text="Cancelar">
          <font>
             <Font size="14.0" />
-         </font></Button>
-      <Label fx:id="lblNombre" layoutX="205.0" layoutY="124.0" text="Nombre:" />
-      <TextField fx:id="txtNombre" layoutX="265.0" layoutY="120.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="txtPrecio" layoutX="266.0" layoutY="288.0" prefHeight="25.0" prefWidth="71.0" />
-      <Label fx:id="lblPrecio" layoutX="221.0" layoutY="292.0" text="Precio:" />
-      <Label fx:id="lblCategoria" layoutX="201.0" layoutY="208.0" text="Categoria:" />
-      <TextField fx:id="txtCategoria" layoutX="266.0" layoutY="204.0" prefHeight="25.0" prefWidth="134.0" />
-      <TextField fx:id="txtTamaño" layoutX="266.0" layoutY="248.0" prefHeight="25.0" prefWidth="101.0" />
-      <Label fx:id="lblTamaño" layoutX="207.0" layoutY="252.0" text="Tamaño:" />
-      <Label layoutX="220.0" layoutY="28.0" text="Agregar Nuevo Item">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
+         </font></JFXButton>
+      <JFXTextField fx:id="txtId" disable="true" editable="false" labelFloat="true" layoutX="144.0" layoutY="53.0" prefHeight="25.0" prefWidth="54.0" promptText="Id" />
    </children>
 </AnchorPane>
