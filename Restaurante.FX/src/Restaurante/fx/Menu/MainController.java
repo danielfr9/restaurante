@@ -95,7 +95,7 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             fadeOut.setOnFinished((e) -> {
                 try {
                     AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("/Restaurante/fx/Menu/main.fxml")));
-                    root.getChildren().setAll(parentContent.getChildren());           
+                    root.getChildren().setAll(parentContent.getChildren()); 
                 } catch (IOException ex) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Restaurante.FX.jar" size="562208" download="eager" />
-    <jar href="lib\Restaurante.BL.jar" size="18546" download="eager" />
+    <jar href="Restaurante.FX.jar" size="562303" download="eager" />
+    <jar href="lib\Restaurante.BL.jar" size="18861" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="437548" download="eager" />
     <jar href="lib\c3p0-0.9.2.1.jar" size="422423" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="309995" download="eager" />

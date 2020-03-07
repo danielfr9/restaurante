@@ -116,10 +116,10 @@ public class FormMenuController implements Initializable {
     }   
 
     private void abrirVentanaModal(Item item, String titulo) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("NuevoItem.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("NuevoEditarItem.fxml"));
         Parent root = (Parent) loader.load();
 
-        NuevoItemController controller = loader.getController();
+        NuevoEditarItemController controller = loader.getController();
         controller.setController(this);
         controller.setItem(item);
 
@@ -199,7 +199,7 @@ public class FormMenuController implements Initializable {
     
     private void eliminar(Item item){
         Alert alert = new Alert(AlertType.CONFIRMATION,
-            "Esta seguro que desea eliminar el Item " + item.getDescripcion() + "?",
+            "Esta seguro que desea eliminar el Item " + item.getNombre() + "?",
             ButtonType.YES, ButtonType.NO);
         
         alert.showAndWait();

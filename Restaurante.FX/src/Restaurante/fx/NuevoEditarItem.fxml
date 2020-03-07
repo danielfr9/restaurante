@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="604.0" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurante.fx.NuevoItemController">
+<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="604.0" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurante.fx.NuevoEditarItemController">
    <children>
       <JFXTextField fx:id="txtNombre" labelFloat="true" layoutX="144.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" promptText="Nombre" />
       <JFXTextField fx:id="txtDescripcion" labelFloat="true" layoutX="144.0" layoutY="150.0" prefHeight="25.0" prefWidth="185.0" promptText="Descripcion" />
-      <JFXComboBox fx:id="cmbCategoria" editable="true" labelFloat="true" layoutX="144.0" layoutY="200.0" prefWidth="150.0" promptText="Categoria" />
-      <JFXComboBox fx:id="cmbTamaño" editable="true" labelFloat="true" layoutX="144.0" layoutY="250.0" prefHeight="25.0" prefWidth="130.0" promptText="Tamaño" />
+      <JFXComboBox fx:id="cmbCategoria" labelFloat="true" layoutX="144.0" layoutY="200.0" prefWidth="150.0" promptText="Categoria" />
+      <JFXComboBox fx:id="cmbTamaño" labelFloat="true" layoutX="144.0" layoutY="250.0" prefHeight="25.0" prefWidth="130.0" promptText="Tamaño" />
       <JFXTextField fx:id="txtExistencia" labelFloat="true" layoutX="144.0" layoutY="300.0" prefHeight="25.0" prefWidth="71.0" promptText="Existencia" />
       <JFXTextField fx:id="txtPrecio" labelFloat="true" layoutX="144.0" layoutY="350.0" prefHeight="25.0" prefWidth="71.0" promptText="Precio" />
       <JFXCheckBox fx:id="chActivo" layoutX="144.0" layoutY="400.0" mnemonicParsing="false" text="Activo" />

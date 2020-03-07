@@ -27,7 +27,7 @@ import javafx.util.converter.NumberStringConverter;
  *
  * @author Daniel
  */
-public class NuevoItemController implements Initializable {
+public class NuevoEditarItemController implements Initializable {
     @FXML
     JFXButton btnCancelar;
     
