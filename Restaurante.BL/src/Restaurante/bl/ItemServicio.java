@@ -2,13 +2,19 @@
 package Restaurante.bl;
 
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Daniel
  */
 public class ItemServicio {
-    private final ArrayList<Item> Menu;
+    /*private final ArrayList<Item> Menu;
     
     public ItemServicio() {
         Menu = new ArrayList();
@@ -18,48 +24,95 @@ public class ItemServicio {
     public ArrayList<Item> getMenu(){
         return Menu;
     }
+    */
+    
+    public ArrayList<Item> getMenu(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        
+        Criteria query = session.createCriteria(Item.class);
+        List<Item> resultado = query.list();
+        
+        tx.commit();
+        session.close();
+        
+        return new ArrayList<>(resultado);
+    }
     
     public ArrayList<Item> getMenu(String buscar){   
-        //ESTA DE MAS
-        if (buscar == null && buscar.equals("")){
-            return Menu;
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
         
-        String buscarMinuscula = buscar.toLowerCase(); 
-        ArrayList<Item> resultado = new ArrayList<>();
-          
-        Menu.forEach(item -> {
-            if (item.getDescripcion().toLowerCase().contains(buscarMinuscula) == true){
-                resultado.add(item);
-            }
-        });
-        return resultado;
+        Transaction tx = session.beginTransaction();
+        
+        Criteria query = session.createCriteria(Item.class);
+        query.add(Restrictions.like("descripcion", buscar, MatchMode.ANYWHERE));
+        
+        List<Item> resultado = query.list();
+        
+        tx.commit();
+        session.close();
+        
+        return new ArrayList<>(resultado);
     }
     
     public String guardar(Item item) {     
         String resultado = validarItem(item);
 
         if (resultado.equals("")){
-            if (item.getId().equals(0)){
-                Integer id = obtenerSiguienteId();
-                item.setId(id);
-                Menu.add(item);
-            }else{
-                Menu.forEach(itemExistente -> {
-                    if(itemExistente.getId().equals(item.getId())){
-                        itemExistente.setDescripcion(item.getDescripcion());
-                    }
-                });
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
+            
+            try{
+                session.saveOrUpdate(item);
+                
+                tx.commit();
+                
+            } catch (Exception e){
+                tx.rollback();
+                return e.getMessage();
+            } finally {
+                session.close();
             }
+            
             return "";
         }
         return resultado;
     }
     
     public void eliminar(Item item){
-        Menu.remove(item);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
+            
+            try{
+                session.delete(item);
+                
+                tx.commit();
+                
+            } catch (Exception e){
+                tx.rollback();
+                System.out.println(e.getMessage());                      
+            } finally {
+                session.close();
+            }
     }
     
+    public Item clonar(Item item){
+        Item itemClonado = new Item();
+        
+        itemClonado.setId(item.getId());
+        itemClonado.setNombre(item.getNombre());
+        itemClonado.setDescripcion(item.getDescripcion());
+        itemClonado.setCategoria(item.getCategoria());
+        itemClonado.setTamaño(item.getTamaño());
+        itemClonado.setExistencia(item.getExistencia());
+        itemClonado.setPrecio(item.getPrecio());
+        itemClonado.setActivo(item.getActivo());
+        
+        return itemClonado;
+    }
+    
+    /*
     private void crearDatosdePrueba() {
         Item item1 = new Item();
         Item item2 = new Item();
@@ -71,6 +124,7 @@ public class ItemServicio {
         item1.setDescripcion("Pollo Frito con tajadas y chimol");
         item1.setCategoria(categorias.getListaDeCategoria().get(0));
         item1.setTamaño(tamaños.getListaDeTamaño().get(2));
+        item1.setExistencia(5);
         item1.setPrecio(120.0);
         item1.setActivo(true);
         
@@ -79,13 +133,14 @@ public class ItemServicio {
         item2.setDescripcion("Ensalada de verduras verdes");
         item2.setCategoria(categorias.getListaDeCategoria().get(1));
         item2.setTamaño(tamaños.getListaDeTamaño().get(1));
+        item2.setExistencia(3);
         item2.setPrecio(150.0);
         item2.setActivo(true);
         
         Menu.add(item1);
         Menu.add(item2);
     }   
-    
+     
     private Integer obtenerSiguienteId() {
         Integer maxId = 1;
         for(Item item: Menu) {
@@ -95,7 +150,8 @@ public class ItemServicio {
         }
         return maxId;
     }
-    
+    */
+
     private String validarItem(Item item) {
         if(item.getId().equals("")){
             return "Ingrese ID";

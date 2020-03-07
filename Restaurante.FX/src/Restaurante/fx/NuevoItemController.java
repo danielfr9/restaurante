@@ -50,6 +50,9 @@ public class NuevoItemController implements Initializable {
     JFXComboBox cmbTamaño;
     
     @FXML
+    JFXTextField txtExistencia;
+    
+    @FXML
     JFXTextField txtPrecio;
     
     @FXML
@@ -59,7 +62,8 @@ public class NuevoItemController implements Initializable {
     private Item item;
     private CategoriaServicio categoriaServicio;
     private TamañoServicio tamañoServicio;
-    
+    ObservableList<Categoria> data;
+    ObservableList<Tamaño> data2;
     
     public void setController(FormMenuController controller) {
         this.controller = controller;
@@ -80,7 +84,15 @@ public class NuevoItemController implements Initializable {
 
             @Override
             public Categoria fromString(String string) {
-                return new Categoria(string);
+                if(data == null){
+                    return null;
+                }
+                for(Categoria categoria: data){
+                    if(categoria.getDescripcion().equals(string)){
+                        return categoria;
+                    }
+                }          
+                return null;
             }
             
         });
@@ -93,10 +105,19 @@ public class NuevoItemController implements Initializable {
 
             @Override
             public Tamaño fromString(String string) {
-                return new Tamaño(string);
+                if(data2 == null){
+                    return null;
+                }
+                for(Tamaño tamaño: data2){
+                    if(tamaño.getDescripcion().equals(string)){
+                        return tamaño;
+                    }
+                }          
+                return null;
             }
             
         });
+        txtExistencia.textProperty().bindBidirectional(item.existenciaProperty(), new NumberStringConverter());
         txtPrecio.textProperty().bindBidirectional(item.precioProperty(), new NumberStringConverter());
         chActivo.selectedProperty().bindBidirectional(item.activoProperty());    
     }
@@ -109,8 +130,8 @@ public class NuevoItemController implements Initializable {
         categoriaServicio = new CategoriaServicio();
         tamañoServicio = new TamañoServicio();
         
-        ObservableList<Categoria> data = FXCollections.observableArrayList(categoriaServicio.getListaDeCategoria());
-        ObservableList<Tamaño> data2 = FXCollections.observableArrayList(tamañoServicio.getListaDeTamaño());
+        data = FXCollections.observableArrayList(categoriaServicio.getListaDeCategoria());
+        data2 = FXCollections.observableArrayList(tamañoServicio.getListaDeTamaño());
         
         cmbCategoria.setItems(data);
         cmbTamaño.setItems(data2);

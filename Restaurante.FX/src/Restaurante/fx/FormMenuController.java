@@ -55,6 +55,9 @@ public class FormMenuController implements Initializable {
     private TableColumn<Item, String> colTamaño;
 
     @FXML
+    private TableColumn<Item, Integer> colExistencia;
+    
+    @FXML
     private TableColumn<Item, Double> colPrecio;
     
     @FXML
@@ -84,6 +87,7 @@ public class FormMenuController implements Initializable {
         colDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         colCategoria.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCategoria().getDescripcion()));
         colTamaño.setCellValueFactory(t -> new SimpleStringProperty(t.getValue().getTamaño().getDescripcion()));
+        colExistencia.setCellValueFactory(new PropertyValueFactory("existencia"));
         colPrecio.setCellValueFactory(new PropertyValueFactory("precio"));
         colActivo.setCellValueFactory(new PropertyValueFactory("activo"));
 
@@ -182,7 +186,8 @@ public class FormMenuController implements Initializable {
                     btn.getStyleClass().add("jfx-button-danger-outline");
                     btn.setOnAction(event -> {
                         tableView.getSelectionModel().select(getTableRow().getItem());
-                        Item item = (Item) getTableRow().getItem();
+                        Item itemExistente = (Item) getTableRow().getItem();
+                        Item item = servicio.clonar(itemExistente);
                         eliminar(item);                  
                     });
                     setGraphic(btn);
