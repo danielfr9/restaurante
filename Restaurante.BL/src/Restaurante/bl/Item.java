@@ -6,11 +6,20 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Daniel
  */
+@Entity
+@Table(name="Item")
 public class Item {
     private final SimpleIntegerProperty id;
     private final SimpleStringProperty nombre;
@@ -18,6 +27,7 @@ public class Item {
     private final SimpleObjectProperty categoria;
     private final SimpleObjectProperty tamaño;
     //private final SimpleStringProperty tamaño;
+    private final SimpleIntegerProperty existencia;
     private final SimpleDoubleProperty precio;
     private final SimpleBooleanProperty activo;
     
@@ -27,10 +37,13 @@ public class Item {
         descripcion = new SimpleStringProperty();
         categoria = new SimpleObjectProperty();
         tamaño = new SimpleObjectProperty();
+        existencia = new SimpleIntegerProperty();
         precio = new SimpleDoubleProperty();
         activo = new SimpleBooleanProperty();
     }
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Integer getId() {
         return id.get();
     }
@@ -43,18 +56,6 @@ public class Item {
         return id;
     }
 
-    public String getDescripcion() {
-        return descripcion.get();
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion.set(descripcion);
-    }
-    
-    public SimpleStringProperty descripcionProperty() {
-        return descripcion;
-    }
-    
     public String getNombre() {
         return nombre.get();
     }
@@ -67,18 +68,20 @@ public class Item {
         return nombre;
     }
     
-    public Double getPrecio() {
-        return precio.get();
+    public String getDescripcion() {
+        return descripcion.get();
     }
 
-    public void setPrecio(Double precio) {
-        this.precio.set(precio);
+    public void setDescripcion(String descripcion) {
+        this.descripcion.set(descripcion);
     }
     
-    public SimpleDoubleProperty precioProperty() {
-        return precio;
+    public SimpleStringProperty descripcionProperty() {
+        return descripcion;
     }
 
+    @ManyToOne
+    @JoinColumn(name="categoriaId", nullable=false)
     public Categoria getCategoria(){
         return (Categoria) categoria.get();
     }
@@ -91,6 +94,8 @@ public class Item {
         return categoria;
     }
     
+    @ManyToOne
+    @JoinColumn(name="tamañoId", nullable=false)
     public Tamaño getTamaño(){
         return (Tamaño) tamaño.get();
     }
@@ -101,6 +106,30 @@ public class Item {
     
     public SimpleObjectProperty tamañoProperty() {
         return tamaño;
+    }
+    
+    public Integer getExistencia() {
+        return existencia.get();
+    }
+
+    public void setExistencia(Integer existencia) {
+        this.existencia.set(existencia);
+    }
+    
+    public SimpleIntegerProperty existenciaProperty() {
+        return existencia;
+    }
+    
+     public Double getPrecio() {
+        return precio.get();
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio.set(precio);
+    }
+    
+    public SimpleDoubleProperty precioProperty() {
+        return precio;
     }
     
     public Boolean getActivo(){

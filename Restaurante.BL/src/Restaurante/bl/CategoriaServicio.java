@@ -2,36 +2,28 @@
 package Restaurante.bl;
 
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author Daniel
  */
-public class CategoriaServicio {
-    private final ArrayList<Categoria> listaDeCategoria;
-
-    public CategoriaServicio() {
-        listaDeCategoria = new ArrayList<>();    
-        crearDatosPrueba();
-    }
-
+public class CategoriaServicio {   
     public ArrayList<Categoria> getListaDeCategoria() {
-        return listaDeCategoria;
-    }
-    
-    private void crearDatosPrueba() {
-        Categoria categoria1 = new Categoria("Carnes");
-        Categoria categoria2 = new Categoria("Ensaladas");
-        Categoria categoria3 = new Categoria("Sopas");
-        categoria1.setId(1);
-        categoria2.setId(2);
-        categoria3.setId(3);
+        Session session = HibernateUtil.getSessionFactory().openSession();
         
-        listaDeCategoria.add(categoria1);
-        listaDeCategoria.add(categoria2);
-        listaDeCategoria.add(categoria3);
+        Transaction tx = session.beginTransaction();
+        
+        Criteria query = session.createCriteria(Categoria.class);
+        List<Categoria> resultado = query.list();
+        
+        tx.commit();
+        session.close();
+        
+        return new ArrayList<>(resultado);
+        
     }
-    
-    
-    
 }
