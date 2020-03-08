@@ -17,7 +17,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,8 +35,9 @@ public class MainController implements Initializable, AbrirFormularioCallback {
 
     @FXML
     private AnchorPane root;
-
+            
     StackPane pane;
+    AnchorPane parentContent;
     
     VBox form;
 
@@ -94,7 +94,7 @@ public class MainController implements Initializable, AbrirFormularioCallback {
 
             fadeOut.setOnFinished((e) -> {
                 try {
-                    AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("/Restaurante/fx/Menu/main.fxml")));
+                    parentContent = FXMLLoader.load(getClass().getResource(("/Restaurante/fx/Menu/main.fxml")));
                     root.getChildren().setAll(parentContent.getChildren()); 
                 } catch (IOException ex) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,12 +133,12 @@ public class MainController implements Initializable, AbrirFormularioCallback {
     
     private void FitControlsToWindow() {
         Stage stage = RestauranteFX.getStage();
-   
-        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
+        
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {           
             ResizeControls(stage, false);
             //System.out.println("Height: " + stage.getHeight() + " Width: " + stage.getWidth());
         };
-        
+ 
         stage.widthProperty().removeListener(stageSizeListener);
         stage.heightProperty().removeListener(stageSizeListener);
         
@@ -151,10 +151,16 @@ public class MainController implements Initializable, AbrirFormularioCallback {
     private void ResizeControls(Stage stage, Boolean firstTime) {
         Integer left = firstTime ? 65 : 35;
         root.setPrefHeight(stage.getHeight());
+        root.setPrefWidth(stage.getWidth());
         drawerStack.setPrefWidth(stage.getWidth());
         hamburger.setLayoutX(stage.getWidth() - hamburger.getWidth() - left);
         drawer.setPrefHeight(stage.getHeight() - 34);
-
+        
+        if(parentContent != null){
+            parentContent.setPrefWidth(stage.getWidth());  
+            parentContent.setPrefHeight(stage.getHeight());
+        }
+        
         if (pane != null) {
             pane.setPrefWidth(stage.getWidth());  
             pane.setPrefHeight(stage.getHeight());
