@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -18,6 +19,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
@@ -32,7 +36,7 @@ public class NuevoEditarItemController implements Initializable {
     JFXButton btnCancelar;
     
     @FXML
-    JFXButton btnAgregar;
+    JFXButton btnAceptar;
     
     @FXML
     JFXTextField txtId;
@@ -57,6 +61,9 @@ public class NuevoEditarItemController implements Initializable {
     
     @FXML
     JFXCheckBox chActivo;
+    
+    @FXML
+    ImageView imgViewImagen;
     
     private FormMenuController controller;
     private Item item;
@@ -119,7 +126,8 @@ public class NuevoEditarItemController implements Initializable {
         });
         txtExistencia.textProperty().bindBidirectional(item.existenciaProperty(), new NumberStringConverter());
         txtPrecio.textProperty().bindBidirectional(item.precioProperty(), new NumberStringConverter());
-        chActivo.selectedProperty().bindBidirectional(item.activoProperty());    
+        chActivo.selectedProperty().bindBidirectional(item.activoProperty());
+        imgViewImagen.imageProperty().bind(item.imageViewProperty());
     }
     
     /**
@@ -155,7 +163,27 @@ public class NuevoEditarItemController implements Initializable {
     public void cancelar() {
         cerrar();
     }
+    
+    public void agregarImagen(){
+        FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter extensiones = 
+            new FileChooser.ExtensionFilter(
+        "Imagenes","*.jpg","*.png");
+        
+        fc.getExtensionFilters().add(extensiones);
+        
+        File archivo = fc.showOpenDialog(null);
+        
+        if(archivo != null){
+            Image image = new Image(archivo.toURI().toString());
+            item.setImageView(image);
+        }
+    }
 
+    public void removerImagen(){
+        item.setImageView(null);
+    }
+    
     private void cerrar() {
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();

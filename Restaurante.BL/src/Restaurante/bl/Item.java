@@ -1,18 +1,28 @@
 
 package Restaurante.bl;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -26,10 +36,11 @@ public class Item {
     private final SimpleStringProperty descripcion;
     private final SimpleObjectProperty categoria;
     private final SimpleObjectProperty tamaño;
-    //private final SimpleStringProperty tamaño;
     private final SimpleIntegerProperty existencia;
     private final SimpleDoubleProperty precio;
     private final SimpleBooleanProperty activo;
+    private final SimpleObjectProperty imageView;
+    private byte[] imagen;
     
     public Item() {
         id = new SimpleIntegerProperty();
@@ -40,6 +51,8 @@ public class Item {
         existencia = new SimpleIntegerProperty();
         precio = new SimpleDoubleProperty();
         activo = new SimpleBooleanProperty();
+        imageView = new SimpleObjectProperty();
+        imagen = "0".getBytes();
     }
     
     @Id
@@ -142,6 +155,49 @@ public class Item {
     
     public SimpleBooleanProperty activoProperty() {
         return activo;
-    }  
+    }
+    
+    @Lob
+    @Column(name = "imagen", columnDefinition = "LONGBLOB")
+    public byte[] getImagen(){
+        return imagen;
+    }
+    
+    public void setImagen(byte[] imagen){
+        this.imagen = imagen;
+    }
+    
+    @Transient
+    public Image getImageView(){
+        Image img = new Image(new ByteArrayInputStream(imagen));
+        return img;
+    }
+    
+    public void setImageView(Image image){
+        if(image == null){
+            setImagen("0".getBytes());
+            imageView.set(image); 
+            return;
+        }
+        
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image,null);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        
+        try{
+            ImageIO.write(bImage, "png", stream);
+            byte[] bytes = stream.toByteArray();
+            stream.close();
+            setImagen(bytes);
+        }catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        imageView.set(image);      
+    }
+    
+    public SimpleObjectProperty imageViewProperty(){
+        return imageView;
+    }
+    
 }
 

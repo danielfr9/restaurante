@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -70,6 +71,9 @@ public class FormMenuController implements Initializable {
     private TableColumn colEliminar;
     
     @FXML
+    private TableColumn colImagen;
+    
+    @FXML
     private JFXTextField txtBuscar;
     
     ObservableList<Item> dataOrden;
@@ -94,6 +98,7 @@ public class FormMenuController implements Initializable {
         //CREANDO METODO EDITAR Y ELIMINAR
         definirColumnaEditar();
         definirColumnaEliminar();
+        definirColumnaImagen();
 
         cargarDatos();
     }
@@ -208,5 +213,28 @@ public class FormMenuController implements Initializable {
            servicio.eliminar(item);
            cargarDatos(); 
         }     
+    }
+
+    private void definirColumnaImagen() {
+        colImagen.setCellFactory(param -> new TableCell<String, String>() {
+        final ImageView img = new ImageView();
+
+            @Override
+            public void updateItem(String cosa, boolean empty) {
+                super.updateItem(cosa, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Item itemExistente = (Item) getTableRow().getItem();                 
+                    img.imageProperty().set(itemExistente.getImageView());
+                    img.setFitWidth(colImagen.getPrefWidth()-10);
+                    img.setPreserveRatio(true);
+                    
+                    setGraphic(img);
+                    setText(null);
+                }
+            }
+        });
     }
 }
