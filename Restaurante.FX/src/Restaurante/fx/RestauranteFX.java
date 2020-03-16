@@ -23,7 +23,7 @@ public class RestauranteFX extends Application {
     public void start(Stage stage) throws Exception {
         RestauranteFX.stage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("/Restaurante/fx/Menu/main.fxml"));
-        Scene scene = new Scene(root,880,555);
+        Scene scene = new Scene(root,990,555);
    
         stage.setScene(scene);
         

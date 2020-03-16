@@ -102,7 +102,7 @@ public class ItemServicio {
         itemClonado.setExistencia(item.getExistencia());
         itemClonado.setPrecio(item.getPrecio());
         itemClonado.setActivo(item.getActivo());
-        
+        itemClonado.setImagen(item.getImagen());
         return itemClonado;
     }
 
