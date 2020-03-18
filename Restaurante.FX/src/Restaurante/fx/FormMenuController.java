@@ -163,13 +163,16 @@ public class FormMenuController implements Initializable {
                     btn.getStyleClass().add("jfx-button-info-outline");
                     btn.setOnAction(event -> {
                     tableView.getSelectionModel().select(getTableRow().getItem());    
-                        Item item = (Item) getTableRow().getItem();
-                        try {
-                            abrirVentanaModal(item, "Editar Item");
-                        } catch (IOException ex) {
-                            Logger.getLogger(FormMenuController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                    Item itemExistente = (Item) getTableRow().getItem();
+                    Item item = servicio.clonar(itemExistente); 
+                    //Item item = (Item) getTableRow().getItem();
+                    try {
+                        abrirVentanaModal(item, "Editar Item");
+                    } catch (IOException ex) {
+                        Logger.getLogger(FormMenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     });
+                    
                     setGraphic(btn);
                     setText(null);
                 }
@@ -190,11 +193,13 @@ public class FormMenuController implements Initializable {
                 } else {
                     btn.getStyleClass().add("jfx-button-danger-outline");
                     btn.setOnAction(event -> {
-                        tableView.getSelectionModel().select(getTableRow().getItem());
-                        Item itemExistente = (Item) getTableRow().getItem();
-                        Item item = servicio.clonar(itemExistente);
-                        eliminar(item);                  
+                    tableView.getSelectionModel().select(getTableRow().getItem());
+                    Item item = (Item) getTableRow().getItem();
+                    //Item itemExistente = (Item) getTableRow().getItem();
+                    //Item item = servicio.clonar(itemExistente);
+                    eliminar(item);                  
                     });
+                    
                     setGraphic(btn);
                     setText(null);
                 }
@@ -226,13 +231,16 @@ public class FormMenuController implements Initializable {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    Item itemExistente = (Item) getTableRow().getItem();                 
-                    img.imageProperty().set(itemExistente.getImageView());
-                    img.setFitWidth(colImagen.getPrefWidth()-10);
-                    img.setPreserveRatio(true);
+                    Item itemExistente = (Item) getTableRow().getItem(); 
                     
-                    setGraphic(img);
-                    setText(null);
+                    if(itemExistente != null){
+                        img.imageProperty().set(itemExistente.getImageView());
+                        img.setFitWidth(colImagen.getPrefWidth()-10);
+                        img.setPreserveRatio(true);
+                    
+                        setGraphic(img);
+                        setText(null);
+                    }
                 }
             }
         });

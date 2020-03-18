@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Set;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -46,8 +48,8 @@ public class Item {
         id = new SimpleIntegerProperty();
         nombre = new SimpleStringProperty();
         descripcion = new SimpleStringProperty();
-        categoria = new SimpleObjectProperty();
-        tamaño = new SimpleObjectProperty();
+        categoria = new SimpleObjectProperty<>();
+        tamaño = new SimpleObjectProperty<>();
         existencia = new SimpleIntegerProperty();
         precio = new SimpleDoubleProperty();
         activo = new SimpleBooleanProperty();
@@ -165,6 +167,9 @@ public class Item {
     
     public void setImagen(byte[] imagen){
         this.imagen = imagen;
+        
+        Image img = new Image (new ByteArrayInputStream(imagen));
+        imageViewProperty().set(img);
     }
     
     @Transient
@@ -199,5 +204,15 @@ public class Item {
         return imageView;
     }
     
+    private Set<FacturaDetalle> facturaDetalle;
+    
+    @OneToMany(mappedBy="item")
+    public Set<FacturaDetalle> getFacturaDetalle(){
+        return facturaDetalle;
+    }
+    
+    public void setFacturaDetalle(Set<FacturaDetalle> facturaDetalle){
+        this.facturaDetalle = facturaDetalle;
+    }
 }
 

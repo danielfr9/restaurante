@@ -13,12 +13,12 @@
    <children>
       <JFXTextField fx:id="txtNombre" labelFloat="true" layoutX="86.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" promptText="Nombre" />
       <JFXTextField fx:id="txtDescripcion" labelFloat="true" layoutX="86.0" layoutY="155.0" prefHeight="25.0" prefWidth="185.0" promptText="Descripcion" />
-      <JFXComboBox fx:id="cmbCategoria" labelFloat="true" layoutX="86.0" layoutY="205.0" prefWidth="150.0" promptText="Categoria" />
-      <JFXComboBox fx:id="cmbTamaño" labelFloat="true" layoutX="86.0" layoutY="255.0" prefHeight="25.0" prefWidth="130.0" promptText="Tamaño" />
+      <JFXComboBox fx:id="cmbCategoria" editable="true" labelFloat="true" layoutX="86.0" layoutY="205.0" prefWidth="150.0" promptText="Categoria" />
+      <JFXComboBox fx:id="cmbTamaño" editable="true" labelFloat="true" layoutX="86.0" layoutY="255.0" prefHeight="25.0" prefWidth="130.0" promptText="Tamaño" />
       <JFXTextField fx:id="txtExistencia" labelFloat="true" layoutX="86.0" layoutY="305.0" prefHeight="25.0" prefWidth="71.0" promptText="Existencia" />
       <JFXTextField fx:id="txtPrecio" labelFloat="true" layoutX="86.0" layoutY="355.0" prefHeight="25.0" prefWidth="71.0" promptText="Precio" />
       <JFXCheckBox fx:id="chActivo" layoutX="86.0" layoutY="405.0" mnemonicParsing="false" text="Activo" />
-      <JFXButton fx:id="btnAceptar" layoutX="404.0" layoutY="438.0" mnemonicParsing="false" onAction="#agregar" prefHeight="25.0" prefWidth="85.0" styleClass="jfx-button-ok" text="Agregar">
+      <JFXButton fx:id="btnGuardar" layoutX="404.0" layoutY="438.0" mnemonicParsing="false" onAction="#agregar" prefHeight="25.0" prefWidth="85.0" styleClass="jfx-button-ok" text="Guardar">
          <font>
             <Font size="14.0" />
          </font></JFXButton>

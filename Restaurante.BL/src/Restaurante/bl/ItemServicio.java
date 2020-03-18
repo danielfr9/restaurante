@@ -16,6 +16,21 @@ import org.hibernate.criterion.Restrictions;
  * @author Daniel
  */
 public class ItemServicio {    
+    public ArrayList<Item> getMenuActivos(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        
+        Criteria query = session.createCriteria(Item.class);
+        query.add(Restrictions.eq("activo", true));
+        List<Item> resultado = query.list();
+        
+        tx.commit();
+        session.close();
+        
+        return new ArrayList<>(resultado);
+    }
+    
     public ArrayList<Item> getMenu(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         

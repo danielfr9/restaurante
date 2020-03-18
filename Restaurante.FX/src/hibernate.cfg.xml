@@ -54,5 +54,7 @@ Contributor(s):
     <mapping class="Restaurante.bl.Categoria"/>
     <mapping class="Restaurante.bl.Tamaño"/>
     <mapping class="Restaurante.bl.Item"/>
+    <mapping class="Restaurante.bl.Factura"/>
+    <mapping class="Restaurante.bl.FacturaDetalle"/>
   </session-factory>
 </hibernate-configuration>

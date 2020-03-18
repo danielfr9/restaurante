@@ -36,7 +36,7 @@ public class NuevoEditarItemController implements Initializable {
     JFXButton btnCancelar;
     
     @FXML
-    JFXButton btnAceptar;
+    JFXButton btnGuardar;
     
     @FXML
     JFXTextField txtId;
@@ -128,6 +128,7 @@ public class NuevoEditarItemController implements Initializable {
         txtPrecio.textProperty().bindBidirectional(item.precioProperty(), new NumberStringConverter());
         chActivo.selectedProperty().bindBidirectional(item.activoProperty());
         imgViewImagen.imageProperty().bind(item.imageViewProperty());
+        
     }
     
     /**
