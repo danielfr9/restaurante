@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Restaurante.FX.jar" size="5288003" download="eager" />
-    <jar href="lib\Restaurante.BL.jar" size="31916" download="eager" />
+    <jar href="Restaurante.FX.jar" size="5293955" download="eager" />
+    <jar href="lib\Restaurante.BL.jar" size="36830" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="437548" download="eager" />
     <jar href="lib\c3p0-0.9.2.1.jar" size="422423" download="eager" />
     <jar href="lib\commons-beanutils-1.8.2.jar" size="231891" download="eager" />
@@ -33,6 +33,7 @@
     <jar href="lib\jdt-compiler-3.1.1.jar" size="1212369" download="eager" />
     <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
     <jar href="lib\mchange-commons-java-0.2.3.4.jar" size="584783" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.18.jar" size="2330539" download="eager" />
     <jar href="lib\slf4j-api-1.6.1.jar" size="25734" download="eager" />
     <jar href="lib\slf4j-simple-1.6.1.jar" size="7741" download="eager" />

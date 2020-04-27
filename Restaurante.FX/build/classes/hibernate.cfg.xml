@@ -55,6 +55,6 @@ Contributor(s):
     <mapping class="Restaurante.bl.Item"/>
     <mapping class="Restaurante.bl.Factura"/>
     <mapping class="Restaurante.bl.FacturaDetalle"/>
+    <mapping class="Restaurante.bl.Usuario"/>
   </session-factory>
 </hibernate-configuration>
-

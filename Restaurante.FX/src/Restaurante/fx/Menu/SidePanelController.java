@@ -1,5 +1,7 @@
 package Restaurante.fx.Menu;
 
+import Restaurante.bl.Usuario;
+import Restaurante.fx.RestauranteFX;
 import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,11 +18,31 @@ public class SidePanelController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listView.getItems().add(new Label("Productos"));
-        listView.getItems().add(new Label("Clientes"));
-        listView.getItems().add(new Label("Facturas"));
-        listView.getItems().add(new Label("Reporte de Productos"));  
-        listView.getItems().add(new Label("Reporte de Facturas"));  
+        Usuario usuarioAutenticado = RestauranteFX.getUsuarioAutenticado();
+        String role = usuarioAutenticado.getRole();
+        
+        switch(role) {
+            case "Administrador": {
+                listView.getItems().add(new Label("Productos"));
+                listView.getItems().add(new Label("Facturas"));
+                listView.getItems().add(new Label("Reporte de Productos"));   
+                listView.getItems().add(new Label("Reporte de Facturas"));                 
+                break;
+            }
+            case "Cajero": {
+                listView.getItems().add(new Label("Facturas"));  
+                listView.getItems().add(new Label("Reporte de Facturas"));                
+                break;
+            }
+            case "Inventario": {
+                listView.getItems().add(new Label("Productos"));
+                listView.getItems().add(new Label("Reporte de Productos"));                   
+                break;
+            }
+        }
+        
+
+        listView.getItems().add(new Label("Cerrar Sesión")); 
         listView.getItems().add(new Label("Salir"));   
         
         listView.setOnMouseClicked(event -> {
@@ -30,7 +52,7 @@ public class SidePanelController implements Initializable {
                 System.exit(0);
             } else {
                 callback.abrirFormulario(label.getText());    
-            }           
+            }
         });
     }
 
