@@ -17,6 +17,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -117,9 +119,7 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Productos":
                     nombreFxml = "FormMenu.fxml";
                     break;
-                case "Clientes":
-                    nombreFxml = "FormClientes.fxml";
-                    break;
+             
                 case "Facturas":
                     nombreFxml = "FormFacturas.fxml";
                     break;
@@ -129,7 +129,13 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Reporte de Facturas":
                     nombreFxml = "FormReporteFacturas.fxml";
                     break; 
-            }            
+                case "Cerrar Sesión":
+                {
+                    cerrarSesion();
+                    return;
+                }
+            }
+            
             form = FXMLLoader.load(getClass().getResource(("/Restaurante/fx/" + nombreFxml)));
             drawerStack.setContent(form);
         } catch (IOException ex) {
@@ -177,4 +183,16 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             form.setPrefHeight(stage.getHeight());
         }
     }
-}
+
+     private void cerrarSesion() throws IOException {
+        Stage stage = RestauranteFX.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("/Restaurante/fx/FormLogin.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.setTitle("Ingresar al Sistema");
+        stage.show();        
+    }      
+    }
+
