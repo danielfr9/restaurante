@@ -59,6 +59,8 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             controller.setCallback(this);
             drawer.setSidePane(box);
             
+            abrirFormularioPredeterminado();
+            
             FitControlsToWindow();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,10 +118,12 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         try {
             String nombreFxml = "";
             switch(nombreFormulario){
+                case "Inicio":
+                    nombreFxml = "FormTablero.fxml";
+                    break;               
                 case "Productos":
                     nombreFxml = "FormMenu.fxml";
                     break;
-             
                 case "Facturas":
                     nombreFxml = "FormFacturas.fxml";
                     break;
@@ -184,7 +188,7 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         }
     }
 
-     private void cerrarSesion() throws IOException {
+    private void cerrarSesion() throws IOException {
         Stage stage = RestauranteFX.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("/Restaurante/fx/FormLogin.fxml"));
         
@@ -194,5 +198,24 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         stage.setTitle("Ingresar al Sistema");
         stage.show();        
     }      
+
+    private void abrirFormularioPredeterminado() {
+        String role = RestauranteFX.getUsuarioAutenticado().getRole();
+        
+        switch(role) {
+            case "Administrador": {
+                abrirFormulario("Inicio");
+                break;
+            }
+            case "Cajero": {
+                abrirFormulario("Facturas");              
+                break;
+            }
+            case "Inventario": {
+                abrirFormulario("Productos");                   
+                break;
+            }            
+        } 
     }
+}
 
