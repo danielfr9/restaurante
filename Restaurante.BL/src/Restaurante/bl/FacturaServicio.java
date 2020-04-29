@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
@@ -27,6 +28,7 @@ public class FacturaServicio {
         Criteria query = session.createCriteria(Factura.class);
         query.addOrder(Order.desc("fecha"));
         query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        query.setFetchMode("facturaDetalle", FetchMode.SELECT);
         query.setMaxResults(10);
 
         List<Factura> resultado = query.list();
